@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Hiệu ứng trái tim rơi</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .heart {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      background-color: red;
+      transform: rotate(45deg);
+      animation: fall 5s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        top: -10%;
+        opacity: 1;
+      }
+      100% {
+        top: 110%;
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.animationDuration = (Math.random() * 3 + 2) + 's'; // 2-5s
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 5000);
+  }
+
+  setInterval(createHeart, 200); // tạo trái tim mỗi 200ms
+</script>
+
+</body>
+</html>
